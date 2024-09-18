@@ -1,6 +1,6 @@
 
 import numpy as np
-from typing import List, Dict
+from typing import Dict
 
 
 def finde_unternetze(scheitelpunkte_dict: Dict) -> Dict:

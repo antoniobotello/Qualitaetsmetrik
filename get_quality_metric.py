@@ -1,8 +1,8 @@
-import json 
+import json, time
 from typing import List, Dict
 from algorithm import finde_unternetze, berechne_groessen, gesamtqualitaet
 
-faces_data_json = 'pikachu/pikachu_1.json'
+faces_data_json = 'pikachu_example.json'
 
 
 with open(faces_data_json, 'r') as file:
@@ -30,6 +30,8 @@ def erstelle_nachbarschafts_dictionary(vollständige_scheitelpunkte_liste: List[
 
 if __name__ == '__main__':
 
+    start = time.time()
+
     clusters = erstelle_nachbarschafts_dictionary(faces_data)
     clusters = finde_unternetze(clusters)
     tamano_submallas = berechne_groessen(clusters)
@@ -38,8 +40,14 @@ if __name__ == '__main__':
  
     clusters['H'] = h_n
     clusters['U'] = u
-    clusters['Q'] = q
+    clusters['Q'] = f"{q:.3f}"
 
-    with open('pikachu_test.json', 'w') as json_file:
+    with open('result_pikachu.json', 'w') as json_file:
         json.dump(clusters,json_file)
+    
+    end = time.time()
+
+    required_time = end - start
+
+    print(f"The process takes {required_time:.3f} seconds")
  
